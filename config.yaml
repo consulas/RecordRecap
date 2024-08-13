@@ -1,0 +1,36 @@
+JOB_DEVICE_MAPPINGS:
+  1:
+    company: J1
+    devices:
+    - device_name: Mic/Line In 03/04 (6- Soundcraf
+      device_index: 16
+      num_channels: 2
+      channel: 0
+    - device_name: Mic/Line In 11/12 (6- Soundcraf
+      device_index: 17
+      num_channels: 2
+      channel: 0
+  2:
+    company: J2
+    devices:
+    - device_name: Mic/Line In 03/04 (6- Soundcraf
+      device_index: 16
+      num_channels: 2
+      channel: 1
+    - device_name: Mic/Line In 11/12 (6- Soundcraf
+      device_index: 17
+      num_channels: 2
+      channel: 1
+DATA_DIR: data
+MODELS_DIR: models
+RECORDINGS_DIR: data\recordings
+TRANSCRIPTS_DIR: data\transcripts
+SUMMARIES_DIR: data\summaries
+WHISPER_MODEL: small.en
+USE_LOCAL_LLAMA: true
+OPENAI_API_KEY: api_key_here
+OPENAI_ENDPOINT: http://localhost:8080/v1/chat/completions
+LLAMA_PORT: 8080
+LLAMA_MODEL: models\Meta-Llama-3.1-8B-Instruct-Q6_K.gguf
+LLAMA_SERVER: models\llama.cpp\llama-server.exe
+LLAMA_CONTEXT: 8192

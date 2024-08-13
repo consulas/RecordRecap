@@ -1,0 +1,6 @@
+pyaudio
+wave
+keyboard
+numpy
+whisper
+requests
