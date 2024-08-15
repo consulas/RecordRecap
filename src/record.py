@@ -4,6 +4,7 @@ import pyaudio
 import wave
 import keyboard
 import numpy as np
+from util import get_device_info
 
 FORMAT = pyaudio.paInt16
 CHANNELS = 2
@@ -14,6 +15,10 @@ CHUNK = 512
 with open('config.yaml', 'r') as f:
     config = yaml.safe_load(f)
 JOB_DEVICE_MAPPINGS = config["JOB_DEVICE_MAPPINGS"]
+
+def find_device_index(device_name):
+    matching_devices = [device for device in get_device_info() if device["device_name"] == device_name]
+    return matching_devices[0].get('index')
 
 def record(job_index, filepath):
     try:
@@ -26,7 +31,7 @@ def record(job_index, filepath):
 
         # Record audio from streams and write to file
         print(f"Press 'q' to stop")
-        streams = [audio.open(format=FORMAT, channels=device["num_channels"], rate=RATE, input=True, input_device_index=device["device_index"], frames_per_buffer=CHUNK) for device in devices]
+        streams = [audio.open(format=FORMAT, channels=device["num_channels"], rate=RATE, input=True, input_device_index=find_device_index(device["device_name"]), frames_per_buffer=CHUNK) for device in devices]
         while True:
             channel_audios = []
             for stream, device in zip(streams, devices):

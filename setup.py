@@ -1,6 +1,7 @@
 import os
 import yaml
 import pyaudio
+from src.util import get_device_info
 
 with open('config.yaml', 'r') as f:
     config = yaml.safe_load(f)
@@ -31,25 +32,10 @@ def get_positive_int(prompt):
         except ValueError:
             print("Please enter a valid number.")
 
-def get_device_info():
-    audio = pyaudio.PyAudio()
-    info = audio.get_host_api_info_by_index(0)
-    num_devices = info.get('deviceCount')
-    device_info_arr = []
-
-    for i in range(num_devices):
-        device_info = audio.get_device_info_by_host_api_device_index(0, i)
-        max_input_channels = device_info.get('maxInputChannels')
-        if max_input_channels > 0:
-            device_name = device_info.get('name')
-            device_info_arr.append({"device_index":i, "device_name":device_name, "num_channels":max_input_channels})
-
-    return device_info_arr
-
 def get_device_selection(device_info):
     print("Available devices:")
     for device in device_info:
-        print(f"Device Index: {device["device_index"]} - Device Name: {device["device_name"]} - Num Channels: {device["num_channels"]}")
+        print(f"Device Index: {device['device_index']} - Device Name: {device['device_name']} - Num Channels: {device['num_channels']}")
     
     while True:
         try:
@@ -100,8 +86,8 @@ def create_config():
             print()
             num_channels, channel = get_channel_choice(selected_device["num_channels"])
             device_config = {
-                "device_name": selected_device["device_name"],
-                "device_index": selected_device["device_index"],
+                "device_name": selected_device["device_name"], # Device name not static if USB port is changed
+                "device_index": selected_device["device_index"], # Device idx not static
                 "num_channels": num_channels,
                 "channel": channel
             }
