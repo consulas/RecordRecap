@@ -4,3 +4,4 @@ keyboard
 numpy
 whisper
 requests
+pyyaml

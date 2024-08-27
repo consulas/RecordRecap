@@ -1,4 +1,9 @@
 # Setup
+## For Linux only
+Install portaudio package, windows will install this with package with pyaudio.  
+`sudo apt-get update && sudo apt-get install portaudio19-dev`  
+
+## Continued setup.
 Run `pip install -r requirements.txt`  
 Run `python setup.py` to create the data directories and populate JOB_DEVICE_MAPPINGS  
 See below for steps to generate the summaries locally vs with OpenAI  
@@ -36,7 +41,14 @@ Choose between the models below as specified here https://github.com/openai/whis
 tiny, tiny.en, base, base.en, small, small.en, medium, medium.en, large, N/A  
 Whisper models are saved in "~/.cache/whisper"  
 
+## Capturing Desktop Audio
+pyaudio can only read input audio streams, so there's no built-in way to capture desktop audio. However you can install any audio loopback tools to route your desktop audio to a virtual microphone. See some software recommendations below.  
+Linux - PulseAudio, ALSA, JACK  
+MacOS - Loopback, VB Audio, JACK  
+Windows - Stereo Mix (by Realtek, needs to be enabled)  
+
 # Usage
+Navigate to the repository's base directory. The scripts must be executed in this base directory.  
 Run `python main.py <job_index> <meeting_name>`  
 Steps:  
 - Record audio to a .wav file  
@@ -46,5 +58,4 @@ Steps:
 ![I say budget otter.ai, but this repo is also not for the GPU poors](doc/repo-meme.jpg)
 
 # Todo
-- Feature: In job device mappings, use an index (ie 1, 2) or the company name (ie J1, J2) to trigger the main script  
-- Bug: pyaudio device indexes will sometimes get remapped, forcing the user to re-run setup.py. The device name however shouldn't change unless you change the port. Specific to the soundcraft mixer, the prefix name of these devices (ex Mic/Line In 11/12) never changes - make a separate branch to support this add'tl feature.  
+- Feature: In job device mappings, use an index (ie 1, 2) or the company name (ie J1, J2) to trigger the main script. Or both?  
