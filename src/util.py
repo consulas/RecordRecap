@@ -14,3 +14,8 @@ def get_device_info():
             device_info_arr.append({"device_index":i, "device_name":device_name, "num_channels":max_input_channels})
 
     return device_info_arr
+
+if __name__ == "__main__":
+    device_info = get_device_info()
+    for device in device_info:
+        print(f"Device Index: {device['device_index']} - Device Name: {device['device_name']} - Num Input Channels: {device['num_channels']}")

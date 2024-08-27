@@ -48,6 +48,7 @@ MacOS - Loopback, VB Audio, JACK
 Windows - Stereo Mix (by Realtek, needs to be enabled)  
 
 # Usage
+Navigate to the repository's base directory. The scripts must be executed in this base directory.  
 Run `python main.py <job_index> <meeting_name>`  
 Steps:  
 - Record audio to a .wav file  
@@ -57,5 +58,4 @@ Steps:
 ![I say budget otter.ai, but this repo is also not for the GPU poors](doc/repo-meme.jpg)
 
 # Todo
-- Feature: In job device mappings, use an index (ie 1, 2) or the company name (ie J1, J2) to trigger the main script  
-- Bug: pyaudio device indexes will sometimes get remapped, forcing the user to re-run setup.py. The device name however shouldn't change unless you change the port. Specific to the soundcraft mixer, the prefix name of these devices (ex Mic/Line In 11/12) never changes - make a separate branch to support this add'tl feature. - Status: Currently in dev branch
+- Feature: In job device mappings, use an index (ie 1, 2) or the company name (ie J1, J2) to trigger the main script. Or both?  

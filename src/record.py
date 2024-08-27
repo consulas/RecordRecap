@@ -4,7 +4,7 @@ import pyaudio
 import wave
 import keyboard
 import numpy as np
-from util import get_device_info
+from src.util import get_device_info
 
 FORMAT = pyaudio.paInt16
 CHANNELS = 2
@@ -18,7 +18,7 @@ JOB_DEVICE_MAPPINGS = config["JOB_DEVICE_MAPPINGS"]
 
 def find_device_index(device_name):
     matching_devices = [device for device in get_device_info() if device["device_name"] == device_name]
-    return matching_devices[0].get('index')
+    return matching_devices[0].get('device_index')
 
 def record(job_index, filepath):
     try:
