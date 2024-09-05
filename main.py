@@ -3,6 +3,7 @@ import sys
 import yaml
 import datetime
 import traceback
+import argparse
 
 from src.record import record
 from src.transcribe import transcribe
@@ -19,9 +20,16 @@ USE_LOCAL_LLAMA = config["USE_LOCAL_LLAMA"]
 
 def main():
     # Get args
-    if len(sys.argv) < 3: print("Not enough arguments. Expected 'python main.py <job_index> <meeting_name>'")
+    parser = argparse.ArgumentParser(description='Process jobs')
+    parser.add_argument('job_index', type=int, help='Job index')
+    parser.add_argument('meeting_name', help='Meeting name')
+    parser.add_argument('-s', '--summary-type', help='Summary type (default: meeting)', default='meeting')
+    args = parser.parse_args()
 
     try:
+        job_index = args.job_index
+        meeting = args.meeting_name
+        summary_type = args.summary_type
         job_index = int(sys.argv[1])
         meeting = sys.argv[2]
 
@@ -40,9 +48,9 @@ def main():
         transcribe(recording_filepath, transcript_filepath)
         print(f"Summarizing {transcript_filepath} to {summary_filepath}")
         if USE_LOCAL_LLAMA:
-            summarize_local(transcript_filepath, summary_filepath)
+            summarize_local(transcript_filepath, summary_filepath, summary_type)
         else: 
-            summarize(transcript_filepath, summary_filepath)
+            summarize(transcript_filepath, summary_filepath, summary_type)
     except Exception as e:
         print("main.py - Encountered an error, exiting")
         print(f"Exception: {e}")
