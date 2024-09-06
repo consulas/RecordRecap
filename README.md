@@ -55,6 +55,11 @@ Steps:
 - Process .wav file into a transcript  
 - Generate a summary from the transcript  
 
+# Options
+```
+-s <option>,    --summary-prompt <option>    [default: "meeting"] Summary prompt to use
+```
+
 ![I say budget otter.ai, but this repo is also not for the GPU poors](doc/repo-meme.jpg)
 
 # Todo
